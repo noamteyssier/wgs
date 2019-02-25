@@ -1,0 +1,61 @@
+library(tidyverse)
+library(ggpubr)
+library(wesanderson)
+
+setwd("~/bin/visuals/WGS/genomeCov")
+
+collapsed <- read_tsv("data/ds_collapsed.tab.gz")
+masked <- read_tsv("data/ds_merged_rep_metric.tab")
+
+#####################################################
+# variance comparison between normalized replicates #
+#####################################################
+
+wide_collapsed <- collapsed %>%
+  select(-snum) %>%
+  spread(key = rep, val = depth)
+
+correlation_plot <- ggplot(wide_collapsed, aes(x = log10(`1`), y=log10(`2`))) +
+  geom_point(shape = 21, size = 0.5, alpha = 0.5, aes(fill = interaction(swga, ext))) +
+  facet_grid(ext~swga~density) +
+  stat_cor() +
+  theme_classic()
+
+
+##################################################
+# Percentile Coverage Comparison Between Samples #
+##################################################
+
+depthPCT <- masked %>%
+  gather(
+    key = 'depth', value = 'percentage',
+    -density, -ext, -swga
+  ) %>%
+  filter(grepl('PCT_[0-9]+X', depth)) %>%
+  mutate(depth = gsub('PCT_', '', depth)) %>%
+  mutate(depth = gsub('X', '', depth) %>% as.integer())
+
+depth_percentage_plot <- ggplot(depthPCT, aes(x = depth, y = percentage)) +
+  geom_point(
+    shape = 21, aes(
+      fill = interaction(swga, ext)
+      )) +
+  geom_line(
+    aes(
+      group = interaction(ext , swga),
+      colour = interaction(swga, ext))
+  ) +
+  geom_hline(yintercept = 0.5, linetype = 'dashed') +
+  geom_vline(xintercept = 10) +
+  facet_wrap(~density, ncol=1) +
+  scale_y_continuous(breaks = c(seq(0,1,0.1))) +
+  scale_x_continuous(breaks = c(seq(0,100,10))) +
+  theme_classic()
+
+
+##############
+# Save Plots #
+##############
+
+ggsave("plots/correlation_plot.png", correlation_plot, width = 10, height = 8)
+ggsave("plots/percentile_plot.png", depth_percentage_plot, width = 10, height = 6)
