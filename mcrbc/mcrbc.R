@@ -1,7 +1,7 @@
 library(tidyverse)
 library(ggpubr)
 
-setwd("~/bin/visuals/WGS/mcrbc")
+setwd("~/bin/wgs/mcrbc")
 
 collapsed <- read_tsv("data/original/collapsed.tab.gz")
 metrics <- read_tsv("data/original/maskedMetrics.tab")
