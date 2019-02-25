@@ -2,10 +2,43 @@ library(tidyverse)
 library(ggpubr)
 library(wesanderson)
 
-setwd("~/bin/visuals/WGS/genomeCov")
+setwd("~/bin/wgs/genomeCov")
 
 collapsed <- read_tsv("data/ds_collapsed.tab.gz")
 masked <- read_tsv("data/ds_merged_rep_metric.tab")
+flagstat <- read_tsv("data/flagstat.tab")
+ss_flagstat <- read_tsv("data/subsampled_flagstat.tab")
+
+###########################################
+# summary plots of sequencing and mapping #
+###########################################
+
+flagstat <- flagstat %>%
+  gather('flagstat', 'count', -density, -extraction, -swga, -rep)
+flagstat$flagstat <- factor(flagstat$flagstat, levels = c('total', 'mapped', 'paired'))
+
+mpt <- ggplot(data = flagstat, aes(x = interaction(extraction, swga), y = count, fill=flagstat)) +
+  geom_bar(stat='identity', position='dodge') +
+  coord_polar() +
+  facet_wrap(~density) +
+  scale_fill_brewer(palette = "Reds") +
+  theme_bw() +
+  xlab("") +
+  theme(legend.position='bottom')
+
+
+ss_flagstat <- ss_flagstat %>%
+  gather('flagstat', 'count', -density, -extraction, -swga, -rep)
+ss_flagstat$flagstat <- factor(ss_flagstat$flagstat, levels = c('total', 'mapped', 'paired'))
+
+ss_mpt <- ggplot(data = ss_flagstat, aes(x = interaction(extraction, swga), y = count, fill=flagstat)) +
+  geom_bar(stat='identity', position='dodge') +
+  coord_polar() +
+  facet_wrap(~density) +
+  scale_fill_brewer(palette = "Blues") +
+  theme_bw()  +
+  xlab("") +
+  theme(legend.position='bottom')
 
 #####################################################
 # variance comparison between normalized replicates #
@@ -57,5 +90,7 @@ depth_percentage_plot <- ggplot(depthPCT, aes(x = depth, y = percentage)) +
 # Save Plots #
 ##############
 
+ggsave("plots/MappedPairedTotal.png", mpt, width = 10, height = 8)
+ggsave("plots/SSMappedPairedTotal.png", ss_mpt, width = 10, height = 8)
 ggsave("plots/correlation_plot.png", correlation_plot, width = 10, height = 8)
 ggsave("plots/percentile_plot.png", depth_percentage_plot, width = 10, height = 6)
