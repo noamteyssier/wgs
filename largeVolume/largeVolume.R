@@ -88,5 +88,5 @@ merged_percentiles <- ggplot(merge_depthPCT, aes(x = depth, y = percentage)) +
   facet_wrap(~type, ncol=1) +
   theme_classic()
 
-ggsave('plots/percentiles.png', percentiles, width = 10, height = 6)
-ggsave('plots/merged_percentiles.png', merged_percentiles, width = 10, height = 6)
+ggsave('plots/percentiles.pdf', percentiles, width = 10, height = 6)
+ggsave('plots/merged_percentiles.pdf', merged_percentiles, width = 10, height = 6)

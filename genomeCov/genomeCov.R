@@ -90,7 +90,7 @@ depth_percentage_plot <- ggplot(depthPCT, aes(x = depth, y = percentage)) +
 # Save Plots #
 ##############
 
-ggsave("plots/MappedPairedTotal.png", mpt, width = 10, height = 8)
-ggsave("plots/SSMappedPairedTotal.png", ss_mpt, width = 10, height = 8)
+ggsave("plots/MappedPairedTotal.pdf", mpt, width = 10, height = 8)
+ggsave("plots/SSMappedPairedTotal.pdf", ss_mpt, width = 10, height = 8)
 ggsave("plots/correlation_plot.png", correlation_plot, width = 10, height = 8)
-ggsave("plots/percentile_plot.png", depth_percentage_plot, width = 10, height = 6)
+ggsave("plots/percentile_plot.pdf", depth_percentage_plot, width = 10, height = 6)
