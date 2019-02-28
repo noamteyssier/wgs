@@ -52,7 +52,9 @@ correlation_plot <- ggplot(wide_collapsed, aes(x = log10(`1`), y=log10(`2`))) +
   geom_point(shape = 21, size = 0.5, alpha = 0.5, aes(fill = interaction(swga, ext))) +
   facet_grid(ext~swga~density) +
   stat_cor() +
-  theme_classic()
+  theme_classic() +
+  xlab("Replicate 1 (log10)") +
+  ylab("Replicate 2 (log10)")
 
 
 ##################################################
