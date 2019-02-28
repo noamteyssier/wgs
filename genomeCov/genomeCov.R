@@ -17,7 +17,7 @@ flagstat <- flagstat %>%
   gather('flagstat', 'count', -density, -extraction, -swga, -rep)
 flagstat$flagstat <- factor(flagstat$flagstat, levels = c('total', 'mapped', 'paired'))
 
-mpt <- ggplot(data = flagstat, aes(x = interaction(extraction, swga), y = count, fill=flagstat)) +
+mpt <- ggplot(data = flagstat, aes(x = interaction(swga, extraction), y = count, fill=flagstat)) +
   geom_bar(stat='identity', position='dodge') +
   coord_polar() +
   facet_wrap(~density) +
@@ -31,7 +31,7 @@ ss_flagstat <- ss_flagstat %>%
   gather('flagstat', 'count', -density, -extraction, -swga, -rep)
 ss_flagstat$flagstat <- factor(ss_flagstat$flagstat, levels = c('total', 'mapped', 'paired'))
 
-ss_mpt <- ggplot(data = ss_flagstat, aes(x = interaction(extraction, swga), y = count, fill=flagstat)) +
+ss_mpt <- ggplot(data = ss_flagstat, aes(x = interaction(swga, extraction), y = count, fill=flagstat)) +
   geom_bar(stat='identity', position='dodge') +
   coord_polar() +
   facet_wrap(~density) +
