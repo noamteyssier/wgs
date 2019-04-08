@@ -5,7 +5,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os, sys
-sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5})
+sns.set(rc={'figure.figsize':(9, 6), 'lines.linewidth': 5})
 
 
 def arrange_metrics(metrics):
@@ -27,11 +27,11 @@ def main():
     long_form = arrange_metrics(metrics)
     long_form = split_samplename(long_form)
 
-
     sns.lineplot(data=long_form, x='depth', y='pc_genome', style='density')
     plt.xticks(np.linspace(0, 100, 21))
+    plt.savefig("plots/percentiles.pdf")
 
-    np.linspace(0, 100, 21)
+    long_form.to_csv("data/control_percentiles.tab", sep="\t", index=False)
 
 if __name__ == '__main__':
     main()
