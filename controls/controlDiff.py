@@ -14,7 +14,7 @@ pd.set_option('mode.chained_assignment', None) # remove settingwithcopywarning
 
 
 def load_bcfs(dir):
-    dir = dir.strip('/')
+    dir = dir.rstrip('/')
     fns = [f for f in os.listdir(dir) if 'SS' in f]
     return [pysam.VariantFile(dir + '/' + i) for i in fns], fns
 
@@ -35,6 +35,7 @@ def get_recs(bcf):
 
 def main():
     dir = 'data/bcf'
+    dir.rstrip('/')
     bcfs, fns = load_bcfs(dir)
 
     recs = []
