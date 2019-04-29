@@ -60,7 +60,7 @@ def main():
         groupby('plate').\
         apply(lambda x : Balance(x))
 
-    plates = pd.concat(Balance.plates)
+    plates = pd.concat(Balance.plates).drop_duplicates()
     plates.to_csv(sys.stdout, sep='\t', index=False)
 
 if __name__ == '__main__':
