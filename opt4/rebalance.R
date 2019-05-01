@@ -43,10 +43,19 @@ ggplot(fs, aes(x = total, fill = digest)) +
   facet_wrap(~density) +
   scale_fill_brewer(palette='Set2')
 
-
-fs %>%
+# calculate percentage to downsample to minimum of replicate pairs
+downsamples <- fs %>%
   select(-mapped, -paired, -sampleName, -pc_mapped) %>%
   tidyr::spread(key = rep, value = total) %>%
   mutate(min_pair = pmin(`1`, `2`)) %>%
   gather('rep', 'total_reads', -density, -extraction, -digest, -swga, -min_pair) %>%
   mutate(ds_fraction = min_pair / total_reads)
+
+# write to tab delim
+downsamples %>%
+  write_tsv("data/rebalance.tab")
+
+
+# ANOVA of variables on mapped percentage
+a <- aov(fs$pc_mapped ~ fs$extraction * fs$swga * fs$digest * fs$density)
+summary(a)
