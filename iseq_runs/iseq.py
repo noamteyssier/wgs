@@ -63,5 +63,18 @@ def main():
     plates = pd.concat(Balance.plates).drop_duplicates()
     plates.to_csv(sys.stdout, sep='\t', index=False)
 
+
+    # plate comparison for namibia balanced / unbalanced
+    plates[((plates.plate == 'bn1') | (plates.plate == 'ubn1')) & (plates.sampleName != 'Undetermined')].\
+        groupby('plate').\
+        agg({
+            'sampleName' : 'count',
+            'balance_coeff' : 'var'
+            })
+    nam = plates[((plates.plate == 'bn1') | (plates.plate == 'ubn1')) & (plates.sampleName != 'Undetermined')]
+    nam[nam.balance_coeff <= 10].groupby('plate').agg({'sampleName' : 'count'})
+
+
+
 if __name__ == '__main__':
     main()
