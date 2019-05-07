@@ -2,12 +2,13 @@
 
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-from scipy.spatial.distance import squareform
-
-sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5})
+# import seaborn as sns
+# import matplotlib.pyplot as plt
+#
+# from scipy.spatial.distance import squareform
+import vcf as pyvcf
+import sys
+# sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5})
 
 
 def tri(df):
@@ -18,29 +19,14 @@ def tri(df):
 
 def main():
     snp_fn = "data/snpDiff.tab"
-    snps = pd.read_csv(snp_fn, sep="\t")
+    vcf_fn = "data/intersect_replicateVariance.vcf"
+    vcf = pyvcf.Reader(open(vcf_fn, 'r'))
 
-    inds = snps[snps.sample_a == snps.sample_b].loc[:,['shared','sample_a']]
-    sns.distplot(inds.shared, kde=False)
+    vcf.samples
+    vcf.infos
 
-
-    piv = pd.pivot_table(
-        snps,
-        index='sample_a',
-        columns='sample_b',
-        values=['uniq_a', 'shared']
-    )
-
-
-    shared = tri(piv.loc[:, 'shared'])
-    unique = tri(piv.loc[:, 'uniq_a'])
-
-    shared
-    unique
-
-    sns.heatmap(unique)
-
-    pass
+    for read in vcf:
+        print(read)
 
 
 if __name__ == '__main__':
