@@ -50,11 +50,12 @@ def plot_replicate_correlation(rep_corr):
     """plot replicate correlation of chromosomes as boxplot"""
     # keep only core chromosomes
     rep_corr = rep_corr[(rep_corr.chrom != 'Pf3D7_API_v3') & (rep_corr.chrom != 'Pf_M76611')]
-    sns.catplot(
+    g = sns.catplot(
         x='density', y = 'correlation',
         kind='box', col='swga',
         row='extraction', height=10,
         hue='digest', data=rep_corr)
+    g.savefig("plots/replicate_correlation.png")
     plt.show()
     plt.close()
 def plot_replicate_skewness(rep_skew):
@@ -63,15 +64,16 @@ def plot_replicate_skewness(rep_skew):
     rep_skew = rep_skew[(rep_skew.chrom != 'Pf3D7_API_v3') & (rep_skew.chrom != 'Pf_M76611')]
 
     # measure skewness
-    sns.catplot(
+    g = sns.catplot(
         x='density', y = 'skew',
         col='swga', row='extraction',
         height=10, hue='digest',
         kind='box',
         data=rep_skew)
+    g.savefig("plots/sample_skewness.png")
     plt.show()
     plt.close()
-def plot_chrom_coverage(wideform):
+def plot_chrom_coverage(wideform, plot_name="chromosome_coverage.png"):
     """plot chromosome coverage as line plot across genome"""
     sample_means = wideform.apply(lambda x : x.mean(), axis=0)
     normed = wideform * sample_means
@@ -84,6 +86,7 @@ def plot_chrom_coverage(wideform):
         aspect=5, height=3, sharex=False, sharey=False,
         hue='summary_stat')
     g.map(sns.lineplot, "pos", "value")
+    g.savefig("plots/" + plot_name)
     plt.show()
     plt.close()
 
@@ -106,8 +109,8 @@ def main():
     plot_replicate_correlation(rep_corr)
     plot_replicate_skewness(rep_skew)
     plot_chrom_coverage(wideform)
-    plot_chrom_coverage(wideform_100)
-    plot_chrom_coverage(wideform_1000)
+    plot_chrom_coverage(wideform_100, plot_name="p100_chromosome_coverage.png")
+    plot_chrom_coverage(wideform_1000, plot_name="p1000_chromosome_coverage.png")
 
 
 
