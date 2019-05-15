@@ -72,6 +72,7 @@ def plot_replicate_skewness(rep_skew):
     plt.show()
     plt.close()
 def plot_chrom_coverage(wideform):
+    """plot chromosome coverage as line plot across genome"""
     sample_means = wideform.apply(lambda x : x.mean(), axis=0)
     normed = wideform * sample_means
     normed[['pos_mean', 'pos_var']] = normed.apply(lambda x : [x.mean(), x.var()], axis=1, result_type='expand')
