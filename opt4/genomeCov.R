@@ -75,7 +75,12 @@ human_flagstat <- melt_flagstat(human_flagstat)
 human_mapping <- percent_mapping(human_flagstat)
 
 # plot
-percentiles_df %>% plot_percentiles()
-flagstat %>% plot_flagstat()
-human_flagstat %>% plot_flagstat()
-human_mapping %>% plot_mapping()
+percentile_cov_plot <- percentiles_df %>% plot_percentiles()
+flagstat_plot <- flagstat %>% plot_flagstat()
+human_flagstat_plot <- human_flagstat %>% plot_flagstat()
+human_mapping_plot <- human_mapping %>% plot_mapping()
+
+ggsave("plots/percentile_coverage.png", percentile_cov_plot, width = 8, height = 6)
+ggsave("plots/pf_flagstat.png", flagstat_plot, width = 8, height = 6)
+ggsave("plots/hum_flagstat.png", human_flagstat_plot, width = 8, height = 6)
+ggsave("plots/human_mapping.png", human_mapping_plot, width = 8, height = 6)
