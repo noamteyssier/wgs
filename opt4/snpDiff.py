@@ -2,11 +2,8 @@
 
 import numpy as np
 import pandas as pd
-import vcf
-import sys, os
-# from scipy.spatial.distance import squareform, pdist
-# from statsmodels.formula.api import ols
-#
+import vcf, sys, os
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5})
@@ -83,7 +80,8 @@ def merge_variants(dir):
 def plot_snp_sample_dist(merged_v):
     """distribution of number of samples across variants"""
     ns = merged_v.reset_index()[['chrom', 'pos', 'num_samples']].drop_duplicates()
-    sns.distplot(ns.num_samples, kde=False)
+    g = sns.distplot(ns.num_samples, kde=False)
+    g.get_figure().savefig("plots/snp_sample_numbers.png", height=8, width=8)
     plt.show()
 def single_sample_snps(merged_v):
     """visualization of single_sample_snps by group"""
@@ -97,7 +95,7 @@ def single_sample_snps(merged_v):
     single_snps[['density', 'extraction', 'digest', 'swga', 'rep']] = \
         single_snps.apply(lambda x : x.sampleName.split('-'), axis = 1, result_type='expand')
 
-    sns.catplot(
+    g = sns.catplot(
         data=single_snps,
         x = 'density',
         y = 'num_single_snps',
@@ -106,6 +104,7 @@ def single_sample_snps(merged_v):
         hue='digest',
         kind='bar',
         height=10)
+    g.savefig("plots/single_sample_snps.png")
     plt.show()
     plt.close()
 
@@ -120,8 +119,6 @@ def main():
 
     plot_snp_sample_dist(merged_v)
     single_sample_snps(merged_v)
-
-
 
 if __name__ == '__main__':
     main()
