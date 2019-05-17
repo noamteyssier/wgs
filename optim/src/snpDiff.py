@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import vcf, sys, os
+from scipy.spatial.distance import *
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -106,6 +107,32 @@ def single_sample_snps(merged_v):
     g.savefig("plots/single_sample_snps.png")
     plt.show()
     plt.close()
+def replicate_concordance(merged_v):
+    """SNP concordance (measured as 1 - Jaccard distance) between replicates"""
+    def jacc_sim(x):
+        return(1 - jaccard(x.af['1'], x.af['2']))
+    mv = merged_v.reset_index()
+    mv[['density', 'extraction', 'digest', 'swga', 'rep']] = mv.apply(lambda x : x.sampleName.split('-'), axis = 1, result_type='expand')
+    rep_mv = pd.pivot_table(mv, index=['chrom', 'pos', 'density', 'extraction', 'digest', 'swga'], columns='rep', values=['af']).reset_index().fillna(0)
+
+    snp_concordance = rep_mv.\
+        groupby(['chrom', 'density', 'extraction', 'digest', 'swga']).\
+        apply(lambda x : jacc_sim(x)).\
+        reset_index().\
+        rename(columns = {0 : 'concordance'})
+
+    g = sns.catplot(
+        data=snp_concordance,
+        col='swga',
+        row='extraction',
+        hue='digest',
+        x='density',
+        y='concordance',
+        kind='box',
+        height=10)
+    g.savefig("../plots/replicate_snp_concordance.png")
+    plt.show()
+    plt.close()
 
 def main():
     dir = "../variant_calls/opt4/"
@@ -118,6 +145,8 @@ def main():
 
     plot_snp_sample_dist(merged_v)
     single_sample_snps(merged_v)
+    replicate_concordance(merged_v)
+
 
 if __name__ == '__main__':
     main()
