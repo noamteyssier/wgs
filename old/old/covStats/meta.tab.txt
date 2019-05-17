@@ -1,0 +1,217 @@
+owner	extractionMethod	density	repairMethod	swgaMethod	replicate	sampleNumber	laneNumber	sampleName
+BH	Chelex	10000	NOR	Sof	1	S44	L001	BH-Chelex-NOR-Sof-1-S44-L001
+BH	Chelex	10000	NOR	Sof	1	S44	L002	BH-Chelex-NOR-Sof-1-S44-L002
+BH	Chelex	10000	NOR	Sof	1	S44	L003	BH-Chelex-NOR-Sof-1-S44-L003
+BH	Chelex	10000	NOR	Sof	1	S44	L004	BH-Chelex-NOR-Sof-1-S44-L004
+BH	Chelex	10000	NOR	Sof	2	S45	L001	BH-Chelex-NOR-Sof-2-S45-L001
+BH	Chelex	10000	NOR	Sof	2	S45	L002	BH-Chelex-NOR-Sof-2-S45-L002
+BH	Chelex	10000	NOR	Sof	2	S45	L003	BH-Chelex-NOR-Sof-2-S45-L003
+BH	Chelex	10000	NOR	Sof	2	S45	L004	BH-Chelex-NOR-Sof-2-S45-L004
+BH	Chelex	10000	NOR	Sof	3	S46	L001	BH-Chelex-NOR-Sof-3-S46-L001
+BH	Chelex	10000	NOR	Sof	3	S46	L002	BH-Chelex-NOR-Sof-3-S46-L002
+BH	Chelex	10000	NOR	Sof	3	S46	L003	BH-Chelex-NOR-Sof-3-S46-L003
+BH	Chelex	10000	NOR	Sof	3	S46	L004	BH-Chelex-NOR-Sof-3-S46-L004
+BH	Chelex	10000	RP	Sof	1	S41	L001	BH-Chelex-RP-Sof-1-S41-L001
+BH	Chelex	10000	RP	Sof	1	S41	L002	BH-Chelex-RP-Sof-1-S41-L002
+BH	Chelex	10000	RP	Sof	1	S41	L003	BH-Chelex-RP-Sof-1-S41-L003
+BH	Chelex	10000	RP	Sof	1	S41	L004	BH-Chelex-RP-Sof-1-S41-L004
+BH	Chelex	10000	RP	Sof	2	S42	L001	BH-Chelex-RP-Sof-2-S42-L001
+BH	Chelex	10000	RP	Sof	2	S42	L002	BH-Chelex-RP-Sof-2-S42-L002
+BH	Chelex	10000	RP	Sof	2	S42	L003	BH-Chelex-RP-Sof-2-S42-L003
+BH	Chelex	10000	RP	Sof	2	S42	L004	BH-Chelex-RP-Sof-2-S42-L004
+BH	Chelex	10000	RP	Sof	3	S43	L001	BH-Chelex-RP-Sof-3-S43-L001
+BH	Chelex	10000	RP	Sof	3	S43	L002	BH-Chelex-RP-Sof-3-S43-L002
+BH	Chelex	10000	RP	Sof	3	S43	L003	BH-Chelex-RP-Sof-3-S43-L003
+BH	Chelex	10000	RP	Sof	3	S43	L004	BH-Chelex-RP-Sof-3-S43-L004
+BH	na	10000	na	na	na	S53	L001	BH-Neg-S53-L001
+BH	na	10000	na	na	na	S53	L002	BH-Neg-S53-L002
+BH	na	10000	na	na	na	S53	L003	BH-Neg-S53-L003
+BH	na	10000	na	na	na	S53	L004	BH-Neg-S53-L004
+BH	Qiagen	10000	NO	Sof	1	S50	L001	BH-Qiagen-NO-Sof-1-S50-L001
+BH	Qiagen	10000	NO	Sof	1	S50	L002	BH-Qiagen-NO-Sof-1-S50-L002
+BH	Qiagen	10000	NO	Sof	1	S50	L003	BH-Qiagen-NO-Sof-1-S50-L003
+BH	Qiagen	10000	NO	Sof	1	S50	L004	BH-Qiagen-NO-Sof-1-S50-L004
+BH	Qiagen	10000	NO	Sof	2	S51	L001	BH-Qiagen-NO-Sof-2-S51-L001
+BH	Qiagen	10000	NO	Sof	2	S51	L002	BH-Qiagen-NO-Sof-2-S51-L002
+BH	Qiagen	10000	NO	Sof	2	S51	L003	BH-Qiagen-NO-Sof-2-S51-L003
+BH	Qiagen	10000	NO	Sof	2	S51	L004	BH-Qiagen-NO-Sof-2-S51-L004
+BH	Qiagen	10000	NO	Sof	3	S52	L001	BH-Qiagen-NO-Sof-3-S52-L001
+BH	Qiagen	10000	NO	Sof	3	S52	L002	BH-Qiagen-NO-Sof-3-S52-L002
+BH	Qiagen	10000	NO	Sof	3	S52	L003	BH-Qiagen-NO-Sof-3-S52-L003
+BH	Qiagen	10000	NO	Sof	3	S52	L004	BH-Qiagen-NO-Sof-3-S52-L004
+BH	Qiagen	10000	RP	Sof	1	S47	L001	BH-Qiagen-RP-Sof-1-S47-L001
+BH	Qiagen	10000	RP	Sof	1	S47	L002	BH-Qiagen-RP-Sof-1-S47-L002
+BH	Qiagen	10000	RP	Sof	1	S47	L003	BH-Qiagen-RP-Sof-1-S47-L003
+BH	Qiagen	10000	RP	Sof	1	S47	L004	BH-Qiagen-RP-Sof-1-S47-L004
+BH	Qiagen	10000	RP	Sof	2	S48	L001	BH-Qiagen-RP-Sof-2-S48-L001
+BH	Qiagen	10000	RP	Sof	2	S48	L002	BH-Qiagen-RP-Sof-2-S48-L002
+BH	Qiagen	10000	RP	Sof	2	S48	L003	BH-Qiagen-RP-Sof-2-S48-L003
+BH	Qiagen	10000	RP	Sof	2	S48	L004	BH-Qiagen-RP-Sof-2-S48-L004
+BH	Qiagen	10000	RP	Sof	3	S49	L001	BH-Qiagen-RP-Sof-3-S49-L001
+BH	Qiagen	10000	RP	Sof	3	S49	L002	BH-Qiagen-RP-Sof-3-S49-L002
+BH	Qiagen	10000	RP	Sof	3	S49	L003	BH-Qiagen-RP-Sof-3-S49-L003
+BH	Qiagen	10000	RP	Sof	3	S49	L004	BH-Qiagen-RP-Sof-3-S49-L004
+GH	chelex	100	na	JP	S38	L001		chelex-100-JP-S38-L001
+GH	chelex	100	na	JP	S38	L002		chelex-100-JP-S38-L002
+GH	chelex	100	na	JP	S38	L003		chelex-100-JP-S38-L003
+GH	chelex	100	na	JP	S38	L004		chelex-100-JP-S38-L004
+GH	chelex	100	na	sanger	S23	L001		chelex-100-sanger-S23-L001
+GH	chelex	100	na	sanger	S23	L002		chelex-100-sanger-S23-L002
+GH	chelex	100	na	sanger	S23	L003		chelex-100-sanger-S23-L003
+GH	chelex	100	na	sanger	S23	L004		chelex-100-sanger-S23-L004
+GH	chelex	100	na	sof	S8	L001		chelex-100-sof-S8-L001
+GH	chelex	100	na	sof	S8	L002		chelex-100-sof-S8-L002
+GH	chelex	100	na	sof	S8	L003		chelex-100-sof-S8-L003
+GH	chelex	100	na	sof	S8	L004		chelex-100-sof-S8-L004
+GH	chelex	10	na	JP	S39	L001		chelex-10-JP-S39-L001
+GH	chelex	10	na	JP	S39	L002		chelex-10-JP-S39-L002
+GH	chelex	10	na	JP	S39	L003		chelex-10-JP-S39-L003
+GH	chelex	10	na	JP	S39	L004		chelex-10-JP-S39-L004
+GH	chelex	10000	na	JP	S36	L001		chelex-10K-JP-S36-L001
+GH	chelex	10000	na	JP	S36	L002		chelex-10K-JP-S36-L002
+GH	chelex	10000	na	JP	S36	L003		chelex-10K-JP-S36-L003
+GH	chelex	10000	na	JP	S36	L004		chelex-10K-JP-S36-L004
+GH	chelex	10000	na	sanger	S21	L001		chelex-10K-sanger-S21-L001
+GH	chelex	10000	na	sanger	S21	L002		chelex-10K-sanger-S21-L002
+GH	chelex	10000	na	sanger	S21	L003		chelex-10K-sanger-S21-L003
+GH	chelex	10000	na	sanger	S21	L004		chelex-10K-sanger-S21-L004
+GH	chelex	10000	na	sof	S6	L001		chelex-10K-sof-S6-L001
+GH	chelex	10000	na	sof	S6	L002		chelex-10K-sof-S6-L002
+GH	chelex	10000	na	sof	S6	L003		chelex-10K-sof-S6-L003
+GH	chelex	10000	na	sof	S6	L004		chelex-10K-sof-S6-L004
+GH	chelex	10	na	sanger	S24	L001		chelex-10-sanger-S24-L001
+GH	chelex	10	na	sanger	S24	L002		chelex-10-sanger-S24-L002
+GH	chelex	10	na	sanger	S24	L003		chelex-10-sanger-S24-L003
+GH	chelex	10	na	sanger	S24	L004		chelex-10-sanger-S24-L004
+GH	chelex	10	na	sof	S9	L001		chelex-10-sof-S9-L001
+GH	chelex	10	na	sof	S9	L002		chelex-10-sof-S9-L002
+GH	chelex	10	na	sof	S9	L003		chelex-10-sof-S9-L003
+GH	chelex	10	na	sof	S9	L004		chelex-10-sof-S9-L004
+GH	chelex	1000	na	JP	S37	L001		chelex-1K-JP-S37-L001
+GH	chelex	1000	na	JP	S37	L002		chelex-1K-JP-S37-L002
+GH	chelex	1000	na	JP	S37	L003		chelex-1K-JP-S37-L003
+GH	chelex	1000	na	JP	S37	L004		chelex-1K-JP-S37-L004
+GH	chelex	1000	na	sanger	S22	L001		chelex-1K-sanger-S22-L001
+GH	chelex	1000	na	sanger	S22	L002		chelex-1K-sanger-S22-L002
+GH	chelex	1000	na	sanger	S22	L003		chelex-1K-sanger-S22-L003
+GH	chelex	1000	na	sanger	S22	L004		chelex-1K-sanger-S22-L004
+GH	chelex	1000	na	sof	S7	L001		chelex-1K-sof-S7-L001
+GH	chelex	1000	na	sof	S7	L002		chelex-1K-sof-S7-L002
+GH	chelex	1000	na	sof	S7	L003		chelex-1K-sof-S7-L003
+GH	chelex	1000	na	sof	S7	L004		chelex-1K-sof-S7-L004
+GH	na	Neg	na	JP	S15	L001		Neg-JP-S15-L001
+GH	na	Neg	na	JP	S15	L002		Neg-JP-S15-L002
+GH	na	Neg	na	JP	S15	L003		Neg-JP-S15-L003
+GH	na	Neg	na	JP	S15	L004		Neg-JP-S15-L004
+GH	na	Neg	na	sanger	S10	L001		Neg-sanger-S10-L001
+GH	na	Neg	na	sanger	S10	L002		Neg-sanger-S10-L002
+GH	na	Neg	na	sanger	S10	L003		Neg-sanger-S10-L003
+GH	na	Neg	na	sanger	S10	L004		Neg-sanger-S10-L004
+GH	na	Neg	na	sof	S5	L001		Neg-sof-S5-L001
+GH	na	Neg	na	sof	S5	L002		Neg-sof-S5-L002
+GH	na	Neg	na	sof	S5	L003		Neg-sof-S5-L003
+GH	na	Neg	na	sof	S5	L004		Neg-sof-S5-L004
+GH	na	Neg	na	water	S40	L001		Neg-water-S40-L001
+GH	na	Neg	na	water	S40	L002		Neg-water-S40-L002
+GH	na	Neg	na	water	S40	L003		Neg-water-S40-L003
+GH	na	Neg	na	water	S40	L004		Neg-water-S40-L004
+GH	qia	100	na	JP	S33	L001		qia-100-JP-S33-L001
+GH	qia	100	na	JP	S33	L002		qia-100-JP-S33-L002
+GH	qia	100	na	JP	S33	L003		qia-100-JP-S33-L003
+GH	qia	100	na	JP	S33	L004		qia-100-JP-S33-L004
+GH	qia	100	na	sanger	S18	L001		qia-100-sanger-S18-L001
+GH	qia	100	na	sanger	S18	L002		qia-100-sanger-S18-L002
+GH	qia	100	na	sanger	S18	L003		qia-100-sanger-S18-L003
+GH	qia	100	na	sanger	S18	L004		qia-100-sanger-S18-L004
+GH	qia	100	na	sof	S3	L001		qia-100-sof-S3-L001
+GH	qia	100	na	sof	S3	L002		qia-100-sof-S3-L002
+GH	qia	100	na	sof	S3	L003		qia-100-sof-S3-L003
+GH	qia	100	na	sof	S3	L004		qia-100-sof-S3-L004
+GH	qia	10	na	JP	S34	L001		qia-10-JP-S34-L001
+GH	qia	10	na	JP	S34	L002		qia-10-JP-S34-L002
+GH	qia	10	na	JP	S34	L003		qia-10-JP-S34-L003
+GH	qia	10	na	JP	S34	L004		qia-10-JP-S34-L004
+GH	qia	10000	na	JP	S31	L001		qia-10K-JP-S31-L001
+GH	qia	10000	na	JP	S31	L002		qia-10K-JP-S31-L002
+GH	qia	10000	na	JP	S31	L003		qia-10K-JP-S31-L003
+GH	qia	10000	na	JP	S31	L004		qia-10K-JP-S31-L004
+GH	qia	10000	na	sanger	S16	L001		qia-10K-sanger-S16-L001
+GH	qia	10000	na	sanger	S16	L002		qia-10K-sanger-S16-L002
+GH	qia	10000	na	sanger	S16	L003		qia-10K-sanger-S16-L003
+GH	qia	10000	na	sanger	S16	L004		qia-10K-sanger-S16-L004
+GH	qia	10000	na	sof	S1	L001		qia-10K-sof-S1-L001
+GH	qia	10000	na	sof	S1	L002		qia-10K-sof-S1-L002
+GH	qia	10000	na	sof	S1	L003		qia-10K-sof-S1-L003
+GH	qia	10000	na	sof	S1	L004		qia-10K-sof-S1-L004
+GH	qia	10	na	sanger	S19	L001		qia-10-sanger-S19-L001
+GH	qia	10	na	sanger	S19	L002		qia-10-sanger-S19-L002
+GH	qia	10	na	sanger	S19	L003		qia-10-sanger-S19-L003
+GH	qia	10	na	sanger	S19	L004		qia-10-sanger-S19-L004
+GH	qia	10	na	sof	S4	L001		qia-10-sof-S4-L001
+GH	qia	10	na	sof	S4	L002		qia-10-sof-S4-L002
+GH	qia	10	na	sof	S4	L003		qia-10-sof-S4-L003
+GH	qia	10	na	sof	S4	L004		qia-10-sof-S4-L004
+GH	qia	1000	na	JP	S32	L001		qia-1K-JP-S32-L001
+GH	qia	1000	na	JP	S32	L002		qia-1K-JP-S32-L002
+GH	qia	1000	na	JP	S32	L003		qia-1K-JP-S32-L003
+GH	qia	1000	na	JP	S32	L004		qia-1K-JP-S32-L004
+GH	qia	1000	na	sanger	S17	L001		qia-1K-sanger-S17-L001
+GH	qia	1000	na	sanger	S17	L002		qia-1K-sanger-S17-L002
+GH	qia	1000	na	sanger	S17	L003		qia-1K-sanger-S17-L003
+GH	qia	1000	na	sanger	S17	L004		qia-1K-sanger-S17-L004
+GH	qia	1000	na	sof	S2	L001		qia-1K-sof-S2-L001
+GH	qia	1000	na	sof	S2	L002		qia-1K-sof-S2-L002
+GH	qia	1000	na	sof	S2	L003		qia-1K-sof-S2-L003
+GH	qia	1000	na	sof	S2	L004		qia-1K-sof-S2-L004
+GH	qiainv	100	na	JP	S30	L001		qiainv-100-JP-S30-L001
+GH	qiainv	100	na	JP	S30	L002		qiainv-100-JP-S30-L002
+GH	qiainv	100	na	JP	S30	L003		qiainv-100-JP-S30-L003
+GH	qiainv	100	na	JP	S30	L004		qiainv-100-JP-S30-L004
+GH	qiainv	100	na	sanger	S28	L001		qiainv-100-sanger-S28-L001
+GH	qiainv	100	na	sanger	S28	L002		qiainv-100-sanger-S28-L002
+GH	qiainv	100	na	sanger	S28	L003		qiainv-100-sanger-S28-L003
+GH	qiainv	100	na	sanger	S28	L004		qiainv-100-sanger-S28-L004
+GH	qiainv	100	na	sof	S13	L001		qiainv-100-sof-S13-L001
+GH	qiainv	100	na	sof	S13	L002		qiainv-100-sof-S13-L002
+GH	qiainv	100	na	sof	S13	L003		qiainv-100-sof-S13-L003
+GH	qiainv	100	na	sof	S13	L004		qiainv-100-sof-S13-L004
+GH	qiainv	10	na	JP	S35	L001		qiainv-10-JP-S35-L001
+GH	qiainv	10	na	JP	S35	L002		qiainv-10-JP-S35-L002
+GH	qiainv	10	na	JP	S35	L003		qiainv-10-JP-S35-L003
+GH	qiainv	10	na	JP	S35	L004		qiainv-10-JP-S35-L004
+GH	qiainv	10000	na	JP	S20	L001		qiainv-10K-JP-S20-L001
+GH	qiainv	10000	na	JP	S20	L002		qiainv-10K-JP-S20-L002
+GH	qiainv	10000	na	JP	S20	L003		qiainv-10K-JP-S20-L003
+GH	qiainv	10000	na	JP	S20	L004		qiainv-10K-JP-S20-L004
+GH	qiainv	10000	na	sanger	S26	L001		qiainv-10K-sanger-S26-L001
+GH	qiainv	10000	na	sanger	S26	L002		qiainv-10K-sanger-S26-L002
+GH	qiainv	10000	na	sanger	S26	L003		qiainv-10K-sanger-S26-L003
+GH	qiainv	10000	na	sanger	S26	L004		qiainv-10K-sanger-S26-L004
+GH	qiainv	10000	na	sof	S11	L001		qiainv-10K-sof-S11-L001
+GH	qiainv	10000	na	sof	S11	L002		qiainv-10K-sof-S11-L002
+GH	qiainv	10000	na	sof	S11	L003		qiainv-10K-sof-S11-L003
+GH	qiainv	10000	na	sof	S11	L004		qiainv-10K-sof-S11-L004
+GH	qiainv	10	na	sanger	S29	L001		qiainv-10-sanger-S29-L001
+GH	qiainv	10	na	sanger	S29	L002		qiainv-10-sanger-S29-L002
+GH	qiainv	10	na	sanger	S29	L003		qiainv-10-sanger-S29-L003
+GH	qiainv	10	na	sanger	S29	L004		qiainv-10-sanger-S29-L004
+GH	qiainv	10	na	sof	S14	L001		qiainv-10-sof-S14-L001
+GH	qiainv	10	na	sof	S14	L002		qiainv-10-sof-S14-L002
+GH	qiainv	10	na	sof	S14	L003		qiainv-10-sof-S14-L003
+GH	qiainv	10	na	sof	S14	L004		qiainv-10-sof-S14-L004
+GH	qiainv	1000	na	JP	S25	L001		qiainv-1K-JP-S25-L001
+GH	qiainv	1000	na	JP	S25	L002		qiainv-1K-JP-S25-L002
+GH	qiainv	1000	na	JP	S25	L003		qiainv-1K-JP-S25-L003
+GH	qiainv	1000	na	JP	S25	L004		qiainv-1K-JP-S25-L004
+GH	qiainv	1000	na	sanger	S27	L001		qiainv-1K-sanger-S27-L001
+GH	qiainv	1000	na	sanger	S27	L002		qiainv-1K-sanger-S27-L002
+GH	qiainv	1000	na	sanger	S27	L003		qiainv-1K-sanger-S27-L003
+GH	qiainv	1000	na	sanger	S27	L004		qiainv-1K-sanger-S27-L004
+GH	qiainv	1000	na	sof	S12	L001		qiainv-1K-sof-S12-L001
+GH	qiainv	1000	na	sof	S12	L002		qiainv-1K-sof-S12-L002
+GH	qiainv	1000	na	sof	S12	L003		qiainv-1K-sof-S12-L003
+GH	qiainv	1000	na	sof	S12	L004		qiainv-1K-sof-S12-L004
+GH	Undetermined	na	na	na	S0	L001		Undetermined-S0-L001
+GH	Undetermined	na	na	na	S0	L002		Undetermined-S0-L002
+GH	Undetermined	na	na	na	S0	L003		Undetermined-S0-L003
+GH	Undetermined	na	na	na	S0	L004		Undetermined-S0-L004
