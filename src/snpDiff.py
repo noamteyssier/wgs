@@ -133,7 +133,7 @@ def preprocess_known_snps(known_snps, threshold=1e4):
     """apply quality treshold to known snps and return"""
     known_snps = known_snps[known_snps.qual >= threshold]
     return known_snps
-def single_strain_concordance(sdf1, sdf2):
+def snp_concordance(sdf1, sdf2):
     """calculate single strain concordance for all single strains for all samples"""
     ssc = sdf1.\
         groupby('sampleName').\
@@ -163,13 +163,16 @@ def main():
     merged_cc = preprocess_variant_df(merged_cc, known_snps, threshold=200)
 
     unique_ss = merged_ss[merged_ss.num_samples == 1]
-    ssc = single_strain_concordance(merged_v, unique_ss)
-    ss_ssc = single_strain_concordance(merged_ss, merged_ss)
-    cc_ssc = single_strain_concordance(merged_cc, unique_ss)
+    ssc = snp_concordance(merged_v, unique_ss)
+    v_ssc = snp_concordance(merged_v, merged_v)
+    ss_ssc = snp_concordance(merged_ss, merged_ss)
+    cc_ssc = snp_concordance(merged_cc, unique_ss)
 
     # distribution of overlaps with single strains
     [sns.distplot(np.log10(1e-6 + ssc.iloc[:,i])) for i in range(1, ssc.shape[1])]
 
+    # replicate concordance heatmap
+    sns.heatmap(v_ssc.set_index('sampleName'))
 
     # # plot_snp_sample_dist(merged_v)
     # # single_sample_snps(merged_v)
