@@ -73,27 +73,38 @@ def plot_replicate_skewness(rep_skew):
     g.savefig("../plots/sample_skewness.png")
     plt.show()
     plt.close()
-def plot_chrom_coverage(wideform, plot_name="chromosome_coverage.png"):
-    """plot chromosome coverage as line plot across genome"""
-    sample_means = wideform.apply(lambda x : x.mean(), axis=0)
-    normed = wideform * sample_means
-    normed[['pos_mean', 'pos_var']] = normed.apply(lambda x : [x.mean(), x.var()], axis=1, result_type='expand')
+def plot_chrom_coverage(wideform, core, chrom='Pf3D7_01_v3'):
+    """plot chromosome depth as line plot across chromosome"""
 
+    # normalize depth
+    normed = (wideform / wideform.sum(axis=0) * 4e7).reset_index()
+    normed = pd.melt(normed, id_vars=['chrom', 'pos'])
 
-    longform = normed[['pos_mean', 'pos_var']].reset_index().melt(id_vars=['chrom', 'pos'], var_name='summary_stat')
-    longform['value'] = np.log10(longform['value'] + 1)
-    g = sns.FacetGrid(longform, row='chrom', col='summary_stat',
-        aspect=5, height=3, sharex=False, sharey=False,
-        hue='summary_stat')
-    g.map(sns.lineplot, "pos", "value")
-    g.savefig("../plots/" + plot_name)
+    # filter to chromosome
+    core = core[core.chrom == chrom]
+    normed = normed[normed.chrom == chrom]
+
+    # plot median depth
+    sns.lineplot(
+        data=normed,
+        x='pos',
+        y='value',
+        ci=95,
+        n_boot=20,
+        estimator=np.median)
+
+    # add core intervals
+    core.apply(lambda x : plt.hlines(-100, x.left_pos, x.right_pos), axis=1)
+
+    # save figure
+    plt.savefig("../plots/genome_cov/{0}.png".format(chrom))
     plt.show()
-    plt.close()
-
 
 
 def main():
     collapsed_fn = "../data/opt4/mergedReplicates.collapsed.tab.gz"
+    core_fn = "../resources/core.bed"
+    core = pd.read_csv(core_fn, sep="\t", header=None, names=['chrom', 'left_pos', 'right_pos'])
     collapsed = pd.read_csv(collapsed_fn, sep='\t')
     collapsed = collapsed[(collapsed.chrom != 'Pf3D7_API_v3') & (collapsed.chrom != 'Pf_M76611')]
 
@@ -103,16 +114,10 @@ def main():
     collapsed = add_sampleName(collapsed)
 
     wideform = wideform_chrom_pos(collapsed)
-    wideform_100 = wideform.loc[:,[i for i in wideform.columns.values if '100-' in i]]
-    wideform_1000 = wideform.loc[:,[i for i in wideform.columns.values if '1000-' in i]]
 
     plot_replicate_correlation(rep_corr)
     plot_replicate_skewness(rep_skew)
-    plot_chrom_coverage(wideform)
-    plot_chrom_coverage(wideform_100, plot_name="p100_chromosome_coverage.png")
-    plot_chrom_coverage(wideform_1000, plot_name="p1000_chromosome_coverage.png")
-
-
+    [plot_chrom_coverage(wideform, core, chrom=i) for i in core.chrom.unique()]
 
 
 if __name__ == '__main__':
