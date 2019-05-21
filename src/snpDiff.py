@@ -121,54 +121,56 @@ def count_samples(snp_df):
         rename(columns = {'sampleName' : 'num_samples'})
     snp_df = snp_df.merge(num_samples, how = 'left')
     return snp_df
-def preprocess_variant_df(snp_df):
+def preprocess_variant_df(snp_df, known_snps, threshold=100):
     """apply quality filtering and sample count"""
-    snp_df = quality_filter(snp_df)
+    snp_df = quality_filter(snp_df, threshold = threshold)
+    snp_df = snp_df.\
+        merge(known_snps[['chrom', 'pos', 'qual']], on=['chrom', 'pos'], how='left').\
+        dropna()
     snp_df = count_samples(snp_df)
     return snp_df
-def single_strain_concordance(snp_df, unique_ss):
+def preprocess_known_snps(known_snps, threshold=1e4):
+    """apply quality treshold to known snps and return"""
+    known_snps = known_snps[known_snps.qual >= threshold]
+    return known_snps
+def single_strain_concordance(sdf1, sdf2):
     """calculate single strain concordance for all single strains for all samples"""
-    ssc = snp_df.\
+    ssc = sdf1.\
         groupby('sampleName').\
-        apply(lambda x : single_strain_overlap(x, unique_ss))
+        apply(lambda x : single_strain_overlap(x, sdf2)).\
+        reset_index()
+    del ssc.columns.name
+
     return ssc
 
 def main():
     exp_dir = "../variant_calls/opt4/"
     ss_dir = "../variant_calls/single_strains/"
+    cc_dir = "../variant_calls/combinations/"
+
     # merge_variants(exp_dir)
     # merge_variants(ss_dir, ofn="../resources/ss_merged_variants.tab.gz")
+    # merge_variants(cc_dir, ofn="../resources/cc_merged_variants.tab.gz")
+
     merged_v = pd.read_csv("../resources/opt4_merged_variants.tab.gz", sep='\t')
     merged_ss = pd.read_csv("../resources/ss_merged_variants.tab.gz", sep="\t")
+    merged_cc = pd.read_csv("../resources/cc_merged_variants.tab.gz", sep="\t")
+    known_snps = pd.read_csv("../resources/pf3k_snps.tab.gz", sep="\t")
 
-    merged_v = preprocess_variant_df(merged_v)
-    merged_ss = preprocess_variant_df(merged_ss)
+    known_snps = preprocess_known_snps(known_snps)
+    merged_v = preprocess_variant_df(merged_v, known_snps, threshold=200)
+    merged_ss = preprocess_variant_df(merged_ss, known_snps, threshold=200)
+    merged_cc = preprocess_variant_df(merged_cc, known_snps, threshold=200)
 
     unique_ss = merged_ss[merged_ss.num_samples == 1]
     ssc = single_strain_concordance(merged_v, unique_ss)
+    ss_ssc = single_strain_concordance(merged_ss, merged_ss)
+    cc_ssc = single_strain_concordance(merged_cc, unique_ss)
 
     # distribution of overlaps with single strains
-    [sns.distplot(np.log10(ssc.iloc[:,i])) for i in range(7)]
-    
-    # test = merged_v.\
-    #     groupby('sampleName').\
-    #     apply(lambda x : x[['chrom', 'pos', 'af', 'sampleName']]).\
-    #     merge(merged_ss[merged_ss.sampleName == 'U51'][['chrom', 'pos', 'af']], how = 'left', on=['chrom', 'pos'])
-    # non_ss_positions = pd.pivot_table(test[np.isnan(test.af_y)], index = ['chrom', 'pos'], columns='sampleName').reset_index()
-    # sample_dist = non_ss_positions.iloc[:,2:].fillna(0).astype('bool').sum(axis=1)
-    # single_sample_dist = non_ss_positions.iloc[:,2:].fillna(0).astype('bool').sum(axis=0)
-    #
-    #
-    # sns.distplot(sample_dist, kde=False)
-    # (sample_dist == 1).mean()
-    # sample_dist
-    # sns.distplot(single_sample_dist, kde=False)
-    # single_sample_dist.var()
-    #
-    # sss_pos = test[np.isnan(test.af_y)].groupby(['chrom', 'pos']).sampleName.count().reset_index().rename(columns={'sampleName' : 'num_samples'})
-    # sss_pos = sss_pos[sss_pos.num_samples == 1]
-    # sns.distplot(sss_pos.merge(merged_v, how='left').qual, kde=False)
-    #
+    [sns.distplot(np.log10(1e-6 + ssc.iloc[:,i])) for i in range(1, ssc.shape[1])]
+
+
     # # plot_snp_sample_dist(merged_v)
     # # single_sample_snps(merged_v)
     # # replicate_concordance(merged_v)
