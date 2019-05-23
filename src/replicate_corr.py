@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from scipy.stats import kurtosis, skew
 
-sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5})
+sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5}, style='ticks')
 
 def add_sampleName(collapsed):
     """hacky method to add sampleNames"""
@@ -46,15 +46,26 @@ def wideform_chrom_pos(collapsed):
         columns='sampleName',
         values='depth')
     return wideform
+def normalize_depth(wideform, num_reads=4e7):
+    """normalize depth by sample to given value"""
+    normed = (wideform / wideform.sum(axis=0) * num_reads).reset_index()
+    normed = pd.melt(normed, id_vars=['chrom', 'pos'])
+    return normed
 def plot_replicate_correlation(rep_corr):
     """plot replicate correlation of chromosomes as boxplot"""
     # keep only core chromosomes
     rep_corr = rep_corr[(rep_corr.chrom != 'Pf3D7_API_v3') & (rep_corr.chrom != 'Pf_M76611')]
     g = sns.catplot(
-        x='density', y = 'correlation',
-        kind='box', col='swga',
-        row='extraction', height=10,
-        hue='digest', data=rep_corr)
+        x='swga',
+        y='correlation',
+        kind='boxen',
+        col='density',
+        row='extraction',
+        height=10,
+        hue='digest',
+        legend_out=False,
+        data=rep_corr)
+    g.set_titles('{row_name} + {col_name}p')
     g.savefig("../plots/replicate_correlation.png")
     plt.show()
     plt.close()
@@ -65,20 +76,20 @@ def plot_replicate_skewness(rep_skew):
 
     # measure skewness
     g = sns.catplot(
-        x='density', y = 'skew',
-        col='swga', row='extraction',
-        height=10, hue='digest',
-        kind='box',
+        x='swga',
+        y='skew',
+        col='density',
+        row='extraction',
+        height=10,
+        hue='digest',
+        kind='boxen',
         data=rep_skew)
+    g.set_titles('{row_name} + {col_name}p')
     g.savefig("../plots/sample_skewness.png")
     plt.show()
     plt.close()
-def plot_chrom_coverage(wideform, core, chrom='Pf3D7_01_v3'):
+def plot_chrom_coverage(normed, core, chrom='Pf3D7_01_v3'):
     """plot chromosome depth as line plot across chromosome"""
-
-    # normalize depth
-    normed = (wideform / wideform.sum(axis=0) * 4e7).reset_index()
-    normed = pd.melt(normed, id_vars=['chrom', 'pos'])
 
     # filter to chromosome
     core = core[core.chrom == chrom]
@@ -92,6 +103,8 @@ def plot_chrom_coverage(wideform, core, chrom='Pf3D7_01_v3'):
         ci=95,
         n_boot=20,
         estimator=np.median)
+    plt.axhline(normed['value'].mean(), color='black', xmin=0, xmax=normed['pos'].max(), linestyle='dashed')
+    plt.axhline(normed['value'].median(), color='#2f3133', xmin=0, xmax=normed['pos'].max(), linestyle='dashdot')
 
     # add core intervals
     core.apply(lambda x : plt.hlines(-100, x.left_pos, x.right_pos), axis=1)
@@ -114,11 +127,11 @@ def main():
     collapsed = add_sampleName(collapsed)
 
     wideform = wideform_chrom_pos(collapsed)
+    normed = normalize_depth(wideform)
 
     plot_replicate_correlation(rep_corr)
     plot_replicate_skewness(rep_skew)
-    [plot_chrom_coverage(wideform, core, chrom=i) for i in core.chrom.unique()]
-
+    [plot_chrom_coverage(normed, core, chrom=i) for i in core.chrom.unique()]
 
 if __name__ == '__main__':
     main()
