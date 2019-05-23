@@ -42,13 +42,19 @@ plot_percentiles <- function(percentiles_df){
 plot_flagstat <- function(flagstat){
   # plot flagstat statistics by group
   flagstat$statistic <- factor(flagstat$statistic, levels=c('human', 'mapped', 'total'))
-  ggplot(flagstat %>% filter(statistic != 'paired'), aes(x = sampleName, y = value/2, fill=digest)) +
-    geom_bar(stat='identity', position='identity', alpha = 0.5, aes(color=statistic)) +
-    facet_wrap(extraction~swga, scales='free_x') +
+
+  ggplot(flagstat %>%
+      filter(statistic != 'paired') %>%
+      unite("sampleName", c(digest, swga, rep), remove=FALSE, sep='-'),
+      aes(x = sampleName, y = value/2, fill=digest)) +
+    geom_bar(stat='identity', position='identity', alpha = 0.5, aes(color=statistic), size=0.8) +
+    facet_wrap(extraction~density, scales='free_x') +
     theme_classic() +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, size = 10)) +
-    scale_color_brewer(palette='Set2') +
-    scale_fill_brewer(palette='Blues') %>%
+    scale_fill_manual(values=c("firebrick4", "peru")) +
+    scale_color_manual(values=c("#28377f", "#2c3f18", "black")) +
+    ylab("Reads Mapped") +
+    xlab("Sample") %>%
     return()
 }
 plot_mapping <- function(pc_flagstat){
