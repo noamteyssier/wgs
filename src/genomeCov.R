@@ -30,14 +30,12 @@ percent_mapping <- function(melted_flagstat){
 ## Plotting
 plot_percentiles <- function(percentiles_df){
   # plot percentiles of coverage by group
-  ggplot(percentiles_df, aes(x = depth, y = percentage, color=as.factor(density), linetype=digest)) +
+  ggplot(percentiles_df, aes(x = depth, y = percentage, color=as.factor(swga), linetype=digest)) +
     geom_line(size = 1) +
-    facet_wrap(extraction~swga, ncol=2) +
-    theme_classic() +
-    scale_color_brewer(palette = 'Dark2') +
-    geom_hline(yintercept=c(0.5, 0.8), linetype=3, size= 0.2) +
-    geom_vline(xintercept=40, linetype=3, size = 0.2) %>%
-  return()
+    facet_wrap(extraction~density, ncol=2) +
+    theme_bw() +
+    scale_color_manual(values = c("darkgreen", '#965e04')) %>%
+    return()
 }
 plot_flagstat <- function(flagstat){
   # plot flagstat statistics by group
