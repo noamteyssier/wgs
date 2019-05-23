@@ -7,7 +7,7 @@ from scipy.spatial.distance import *
 
 import seaborn as sns
 import matplotlib.pyplot as plt
-sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5})
+sns.set(rc={'figure.figsize':(22, 22), 'lines.linewidth': 5}, style='ticks')
 
 class SampleVariants:
     def __init__(self, dir, fn):
@@ -88,13 +88,16 @@ def replicate_concordance(merged_v):
 
     g = sns.catplot(
         data=snp_concordance,
-        col='swga',
+        col='density',
         row='extraction',
         hue='digest',
-        x='density',
+        x='swga',
         y='concordance',
-        kind='box',
+        kind='boxen',
         height=10)
+    g.set_titles("{row_name} + {col_name}p")
+    g.set_ylabels("1 - Jaccard Distance")
+    g.set_xlabels("sWGA Method")
     g.savefig("../plots/replicate_snp_concordance.png")
     plt.show()
     plt.close()
@@ -142,6 +145,20 @@ def snp_concordance(sdf1, sdf2):
     del ssc.columns.name
 
     return ssc
+def optim_concordance_heatmap(v_ssc):
+    """draw heatmap of snp concordance across optim"""
+    df = v_ssc.set_index('sampleName')
+    sns.heatmap(
+        data=df,
+        robust=True,
+        square=True,
+        center=0.7,
+        linewidths=0.25,
+        xticklabels=False)
+    plt.ylabel("Sample Name")
+    plt.savefig("../plots/grouped_snp_concordnace.png")
+
+
 
 def main():
     exp_dir = "../variant_calls/opt4/"
@@ -171,12 +188,12 @@ def main():
     # distribution of overlaps with single strains
     [sns.distplot(np.log10(1e-6 + ssc.iloc[:,i])) for i in range(1, ssc.shape[1])]
 
-    # replicate concordance heatmap
-    sns.heatmap(v_ssc.set_index('sampleName'))
+    # replicate + sample concordance
+    replicate_concordance(merged_v)
+    optim_concordance_heatmap(v_ssc)
 
     # # plot_snp_sample_dist(merged_v)
     # # single_sample_snps(merged_v)
-    # # replicate_concordance(merged_v)
 
 
 if __name__ == '__main__':
