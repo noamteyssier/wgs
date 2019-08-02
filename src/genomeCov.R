@@ -31,22 +31,6 @@ percent_mapping <- function(melted_flagstat){
 }
 
 ## Plotting
-plot_percentiles <- function(percentiles_df){
-  # plot percentiles of coverage by group
-  percentiles_df <- percentiles_df %>%
-    mutate(
-      swga = ifelse(swga == 'Sof', '6A + 10A', '10A'),
-      digest = ifelse(digest == 'M', 'McrBC', 'No McrBC'),
-      `sWGA primers` = as.factor(swga)
-    )
-  ggplot(percentiles_df, aes(x = depth, y = percentage, color=interaction(`sWGA primers`, extraction), linetype=digest)) +
-    geom_line(size = 1) +
-    facet_wrap(~density, ncol=1, scales='free') +
-    theme_bw() +
-    scale_y_continuous(limits=c(0,1))  +
-    scale_color_brewer(palette="paired") %>%
-    return()
-}
 plot_flagstat <- function(flagstat){
   # plot flagstat statistics by group
   flagstat$statistic <- factor(flagstat$statistic, levels=c('human', 'mapped', 'total'))
@@ -149,7 +133,19 @@ ggplot(grouped_flags, aes(y = as.factor(density), x = extraction, fill=pc_mapped
 # process
 percentiles_df <- melt_pc_df(percentiles_df)
 # plot
-percentile_cov_plot <- percentiles_df %>% plot_percentiles()
 
-ggsave("../plots/percentile_coverage.pdf", percentile_cov_plot, width = 8, height = 6)
-ggsave("../plots/percentile_coverage.png", percentile_cov_plot, width = 8, height = 6)
+percentiles_df$extraction <- factor(percentiles_df$extraction, levels=c('Qia', 'Che'))
+percentiles_df$swga <- factor(percentiles_df$swga, levels=c('Sof', 'Sang'))
+percentile_cov_plot <- ggplot(percentiles_df, aes(x = depth, y = percentage, color=interaction(extraction, swga), linetype=digest)) +
+  geom_vline(xintercept=10, linetype='dashed', size=.3) +
+  geom_hline(yintercept=.8, linetype='dashed', size=.3) +
+  geom_line(size = 1) +
+  facet_wrap(~density, scales='free') +
+  theme_bw() +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,.2)) +
+  scale_x_continuous(limits=c(0,100), breaks=c(1,5,10,15,20,25,30,50,75,100), labels=c(1,'',10,'',20,'',30,50,75,100)) +
+  scale_color_manual(values = hex %>% rev()) +
+  guides(colour=F, linetype=F)
+
+ggsave("../plots/percentile_coverage.pdf", percentile_cov_plot, width = 12, height = 5)
+ggsave("../plots/percentile_coverage.png", percentile_cov_plot, width = 12, height = 5)
