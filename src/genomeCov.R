@@ -92,34 +92,50 @@ original_runs <- read_tsv("../data/complete_set/original_run_results.tab")
 
 # Flagstat processing
 summarised_flagstat <- flagstat %>%
-  group_by(density, extraction, digest, organism) %>%
+  group_by(density, extraction, digest, organism, swga) %>%
   summarise(
     mean_pc = mean(pc_mapped),
     std_pc = sd(pc_mapped)
   )
+
+
+hex = c(
+    '#e45c26',
+    '#00B26e',
+    '#efa89a',
+    '#88D5A9',
+    '#ffe6de',
+    '#bfead0'
+  ) %>% rev()
+
 summarised_flagstat$organism <- factor(summarised_flagstat$organism, levels=c('unknown', 'human', 'falciparum'))
 summarised_flagstat$digest <- factor(summarised_flagstat$digest, levels=c('R', 'M'))
-pc_mapped_plt <- ggplot(summarised_flagstat, aes(x = interaction(extraction, digest), y = mean_pc, fill=organism)) +
-  geom_bar(stat='identity', position='stack') +
+summarised_flagstat$swga <- factor(summarised_flagstat$swga, levels=c('Sof', 'Sang'))
+pc_mapped_plt <- ggplot(summarised_flagstat, aes(x = interaction(digest, interaction(swga, extraction)), y = mean_pc, fill=interaction(extraction, organism))) +
+  geom_bar(stat='identity', position='stack', width=1, colour='black', size=.1) +
   geom_errorbar(
     data = summarised_flagstat %>% filter(organism == 'falciparum'),
     aes(ymin=mean_pc - std_pc, ymax = mean_pc + std_pc),
     width=.2
     ) +
-  facet_wrap(~density, scales='free_x') +
-  theme_minimal() +
-  scale_fill_brewer(palette = 'BuGn') +
-  xlab('Extraction and Digest Condition') +
-  ylab('Percentage Mapped') +
-  ggtitle('Percentage Mapped to Organism by Parasite Density')
-ggsave('../plots/pf_flagstat.pdf', pc_mapped_plt, width=8, height=8)
-ggsave('../plots/pf_flagstat.png', pc_mapped_plt, width=8, height=8)
+  facet_grid(~density, scales='free_x', space='free') +
+  theme_bw() +
+  xlab('') +
+  ylab('Read Fraction') +
+  ggtitle('') +
+  theme(axis.text.x = element_text(angle=45, hjust=.95, vjust=.95)) +
+  scale_fill_manual(values = hex) +
+  scale_y_continuous(expand=c(0.001,0.01), breaks=seq(0,1,.1)) +
+  guides(fill=FALSE)
 
+ggsave('../plots/pf_flagstat.pdf', pc_mapped_plt, width=6, height=5)
+ggsave('../plots/pf_flagstat.png', pc_mapped_plt, width=6, height=5)
+
+# make table for supp
 grouped_flags <- original_runs %>%
   mutate(pc_mapped = mapped / totalReads) %>%
   group_by(extraction, density, swga) %>%
   summarise(pc_mapped = mean(pc_mapped))
-
 ggplot(grouped_flags, aes(y = as.factor(density), x = extraction, fill=pc_mapped)) +
   geom_tile() +
   facet_wrap(~swga) +
@@ -127,7 +143,7 @@ ggplot(grouped_flags, aes(y = as.factor(density), x = extraction, fill=pc_mapped
   ylab('Parasite Density') +
   xlab('Extraction Method') +
   theme(axis.text.x = element_text(angle = 45, vjust = .95, hjust=.95, size = 10)) +
-  scale_fill_gradient(low = "gray80", high = "steelblue")
+  scale_fill_gradient(low = "gray98", high = "steelblue")
 
 
 # process
