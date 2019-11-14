@@ -1,10 +1,11 @@
 library(tidyverse)
 library(reshape2)
 library(RColorBrewer)
+setwd("~/projects/wgs/.old/old/sWGA_merge")
 
-meta <- read_tsv('/home/noam/bin/visuals/WGS/sWGA_merge/meta.tab.txt')
-metrics <- read_tsv('/home/noam/bin/visuals/WGS/sWGA_merge/sampleMetrics.tab.txt')
-covHist <- read_tsv('/home/noam/bin/visuals/WGS/sWGA_merge/coverageHistograms.tab.txt')
+meta <- read_tsv('meta.tab.txt')
+metrics <- read_tsv('sampleMetrics.tab.txt')
+covHist <- read_tsv('coverageHistograms.tab.txt')
 
 # merge meta with main
 sampleMetrics <- left_join(metrics, meta, by='SAMPLE_NAME')
@@ -69,12 +70,23 @@ percentilesCov <- ggplot(data = quantileInfo %>%
   scale_color_manual(values = brewer.pal(7, 'Set1'))
 
 
+single_swga_missing_qia <- depthBool %>% 
+    filter(
+      PARASITE_DENSITY != 'Neg',
+      EXTRACTION_METHOD != 'chelex',
+      !grepl('_',SWGA_COMBINATION)
+      )
+single_swga_missing_che <- depthBool %>% 
+  filter(
+    PARASITE_DENSITY != 'Neg',
+    grepl('che', SAMPLE_NAME),
+    !grepl('_',SWGA_COMBINATION)
+  )
+single_swga_missing %>%  filter(PARASITE_DENSITY == 1000)
 
 # Binary Coverage
-pcNotCov <- ggplot(data = depthBool %>%
-  filter(PARASITE_DENSITY != 'Neg') %>%
-  filter(EXTRACTION_METHOD != 'chelex'),
-  aes(x = PARASITE_DENSITY, y = (pcNotCovered), colour=SWGA_COMBINATION)) +
+pcNotCov <- ggplot(data = single_swga_missing,
+                   aes(x = PARASITE_DENSITY, y = (pcNotCovered), colour=SWGA_COMBINATION)) +
   geom_point() +
   geom_line(aes(group = SWGA_COMBINATION)) +
   facet_wrap(~EXTRACTION_METHOD, scales='free') +

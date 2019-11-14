@@ -69,8 +69,8 @@ zoom_in_plot <- ggplot(grouped_pf3k_sim,
 
 ggsave("../plots/full_size.pdf", full_size_plot, width = 8, height = 6)
 ggsave("../plots/full_size.png", full_size_plot, width = 8, height = 6)
-ggsave("../plots/zoom_in.pdf", zoom_in_plot, width = 4, height = 3)
-ggsave("../plots/zoom_in.png", zoom_in_plot, width = 4, height = 3)
+ggsave("../plots/zoom_in.pdf", zoom_in_plot, width = 8, height = 6)
+ggsave("../plots/zoom_in.png", zoom_in_plot, width = 8, height = 6)
 
 
 #############################
